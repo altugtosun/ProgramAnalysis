@@ -1,0 +1,40 @@
+package ast.statement;
+
+import ast.expression.booleanExpression.BooleanExpression;
+import ast.expression.lexpression.LExpression;
+
+public class IfStatement extends Statement {
+
+    private BooleanExpression boolExpression;
+    private Statement statement;
+
+    public IfStatement(BooleanExpression boolExp, Statement sta) {
+        this.boolExpression = boolExp;
+        this.statement = sta;
+    }
+
+    @Override
+    public BooleanExpression getBoolExpression() {
+        return this.boolExpression;
+    }
+
+    @Override
+    public Statement getFirstStatement() {
+        return this.statement;
+    }
+
+    @Override
+    public Statement getSecondStatement() {
+        return null;
+    }
+
+    @Override
+    public String getIdentifier() {
+        return null;
+    }
+
+    @Override
+    public LExpression getlExpression() {
+        return null;
+    }
+}
