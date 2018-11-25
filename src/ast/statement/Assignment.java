@@ -13,12 +13,19 @@ public class Assignment extends Statement {
         this.aExpression = aExp;
     }
 
+    @Override
     public LExpression getlExpression() {
         return this.lExpression;
     }
 
+    @Override
     public AExpression getaExpression() {
         return this.aExpression;
+    }
+
+    @Override
+    public AExpression getaExpression2() {
+        return null;
     }
 
     @Override

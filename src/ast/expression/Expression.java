@@ -1,6 +1,7 @@
 package ast.expression;
 
 import ast.ProgramStep;
+import ast.expression.aexpression.AExpression;
 import ast.expression.lexpression.LExpression;
 
 public class Expression implements ProgramStep {
@@ -12,6 +13,16 @@ public class Expression implements ProgramStep {
 
     @Override
     public LExpression getlExpression() {
+        return null;
+    }
+
+    @Override
+    public AExpression getaExpression() {
+        return null;
+    }
+
+    @Override
+    public AExpression getaExpression2() {
         return null;
     }
 }

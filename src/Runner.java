@@ -1,3 +1,4 @@
+import analysis.dos.DetectionOfSigns;
 import ast.Program;
 import ast.declaration.ArrayDeclaration;
 import ast.declaration.Declaration;
@@ -10,7 +11,6 @@ import ast.expression.lexpression.LArrayExpression;
 import ast.expression.lexpression.LExpression;
 import ast.expression.lexpression.LVariableExpression;
 import ast.statement.*;
-import com.sun.corba.se.spi.orbutil.threadpool.Work;
 import programGraph.ControlFlowAnalysis;
 import analysis.rda.ReachingDefinitions;
 import worklist.Worklist;
@@ -67,41 +67,16 @@ public class Runner {
         variableList.add("a");
         programGraph.setVariableList(variableList);
         programGraph.createProgramGraph(testProgram);
-        //programGraph.print();
+        programGraph.print();
 
         ReachingDefinitions rda = new ReachingDefinitions(programGraph);
-        Worklist worklist = new Worklist(rda, "LIFO");
-        worklist.solve();
+        Worklist rdaWorklist = new Worklist(rda, "LIFO");
+        rdaWorklist.solve();
         rda.print();
 
-        /*ArrayList<ArrayList<String>> newSol = new ArrayList<>();
-        ArrayList<String> temp = new ArrayList<>();
-        temp.add("a");temp.add("0");temp.add("1");
-        newSol.add(temp);
-        ArrayList<String> temp2 = new ArrayList<>();
-        temp2.add("x");temp2.add("2");temp2.add("3");
-        newSol.add(temp2);
-        ArrayList<String> temp3 = new ArrayList<>();
-        temp3.add("a");temp3.add("5");temp3.add("6");
-        newSol.add(temp3);
-        ArrayList<String> temp4 = new ArrayList<>();
-        temp4.add("a");temp4.add("7");temp4.add("3");
-        newSol.add(temp4);
-        System.out.println(newSol);
-
-        ArrayList<ArrayList<String>> currentSol = new ArrayList<>();
-        ArrayList<String> temp5 = new ArrayList<>();
-        temp5.add("a");temp5.add("0");temp5.add("1");
-        currentSol.add(temp5);
-        ArrayList<String> temp6 = new ArrayList<>();
-        temp6.add("x");temp6.add("2");temp6.add("3");
-        currentSol.add(temp2);
-        ArrayList<String> temp7 = new ArrayList<>();
-        temp7.add("a");temp7.add("7");temp7.add("3");
-        currentSol.add(temp7);
-        System.out.println(currentSol);
-
-        String asd = "[[a, 0, 1], [x, 2, 3], [a, 5, 6], [a, 7, 3]] [[a, 0, 1], [x, 2, 3], [a, 7, 3]]";
-        System.out.println(newSol.containsAll(currentSol));*/
+        DetectionOfSigns ds = new DetectionOfSigns(programGraph);
+        Worklist dsWorklist = new Worklist(ds, "LIFO");
+        dsWorklist.solve();
+        ds.print();
     }
 }

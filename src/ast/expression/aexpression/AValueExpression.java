@@ -8,6 +8,7 @@ public class AValueExpression extends AExpression {
         this.value = val;
     }
 
+    @Override
     public Integer getValue() {
         return this.value;
     }

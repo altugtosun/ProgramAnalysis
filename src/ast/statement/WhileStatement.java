@@ -1,5 +1,6 @@
 package ast.statement;
 
+import ast.expression.aexpression.AExpression;
 import ast.expression.booleanExpression.BooleanExpression;
 import ast.expression.lexpression.LExpression;
 
@@ -35,6 +36,16 @@ public class WhileStatement extends Statement {
 
     @Override
     public LExpression getlExpression() {
+        return null;
+    }
+
+    @Override
+    public AExpression getaExpression() {
+        return null;
+    }
+
+    @Override
+    public AExpression getaExpression2() {
         return null;
     }
 }

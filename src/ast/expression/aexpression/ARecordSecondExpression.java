@@ -8,6 +8,7 @@ public class ARecordSecondExpression extends AExpression {
         this.identifier = id;
     }
 
+    @Override
     public String getIdentifier() {
         return this.identifier;
     }

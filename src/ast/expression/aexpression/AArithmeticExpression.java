@@ -12,10 +12,12 @@ public class AArithmeticExpression extends AExpression {
         this.arithmeticOperator = arithOp;
     }
 
-    public AExpression getaExpression1() {
+    @Override
+    public AExpression getaExpression() {
         return this.aExpression1;
     }
 
+    @Override
     public AExpression getaExpression2() {
         return this.aExpression2;
     }

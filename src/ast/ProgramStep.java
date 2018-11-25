@@ -1,9 +1,12 @@
 package ast;
 
+import ast.expression.aexpression.AExpression;
 import ast.expression.lexpression.LExpression;
 
 public interface ProgramStep {
 
-    public String getIdentifier();
-    public LExpression getlExpression();
+    String getIdentifier();
+    LExpression getlExpression();
+    AExpression getaExpression();
+    AExpression getaExpression2();
 }

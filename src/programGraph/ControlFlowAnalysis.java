@@ -60,6 +60,10 @@ public class ControlFlowAnalysis {
             Edge tempEdge = new Edge(startNode, endNode, statement);
             this.edgeList.add(tempEdge);
         }
+        else if(statement.getClass().getName().equals("ast.statement.RecordAssignment")) {
+            Edge tempEdge = new Edge(startNode, endNode, statement);
+            this.edgeList.add(tempEdge);
+        }
         else if(statement.getClass().getName().equals("ast.statement.ReadStatement")) {
             Edge tempEdge = new Edge(startNode, endNode, statement);
             this.edgeList.add(tempEdge);
@@ -121,8 +125,8 @@ public class ControlFlowAnalysis {
         for(Edge edge : this.edgeList) {
             System.out.println(edge.getStartNode().getLabelId() + "-" + edge.getProgramStep().getClass().getName() + "-" + edge.getEndNode().getLabelId());
         }
-        for(Node node : this.nodeList) {
+        /*for(Node node : this.nodeList) {
             System.out.println(node.getLabelId());
-        }
+        }*/
     }
 }

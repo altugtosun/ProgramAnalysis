@@ -89,33 +89,8 @@ public class ReachingDefinitions implements Analysis {
         return result;
     }
 
-    /*public void createConstraints() {
-        for(Node node : cfa.nodeList) {
-            if(node.getLabelId() == 0) {
-                for(String variable : cfa.variableList) {
-                    ArrayList<String> temp = new ArrayList<>();
-                    temp.add(variable);
-                    temp.add("?");
-                    temp.add(node.getLabelId().toString());
-                    this.analysisSet.get(0).add(temp);
-                }
-            }
-            else {
-                for(Edge edge : cfa.edgeList) {
-                    if(node.equals(edge.getEndNode())) {
-                        ArrayList<ArrayList<String>> temp = (ArrayList<ArrayList<String>>) analysisSet.get(edge.getStartNode().getLabelId()).clone();
-                        temp.removeAll(kill(edge, analysisSet.get(edge.getStartNode().getLabelId())));
-                        temp.addAll(gen(edge));
-                        analysisSet.get(node.getLabelId()).addAll(temp);
-                    }
-                }
-            }
-        }
-    }*/
-
     public ArrayList<ArrayList<String>> kill(Edge edge, ArrayList<ArrayList <String>> elementRD) {
         ArrayList<ArrayList<String>> result = new ArrayList<>();
-        //System.out.println(edge.getProgramStep().getClass().getName());
         if(edge.getProgramStep().getClass().getName().equals("ast.declaration.IntegerDeclaration") || edge.getProgramStep().getClass().getName().equals("ast.declaration.ArrayDeclaration")) {
             ArrayList<String> temp = new ArrayList<>();
             temp.add(edge.getProgramStep().getIdentifier());
@@ -136,7 +111,16 @@ public class ReachingDefinitions implements Analysis {
             result.add(temp2);
         }
         else if(edge.getProgramStep().getClass().getName().equals("ast.statement.RecordAssignment")) {
-            //TODO
+            for(ArrayList<String> stringArray : elementRD) {
+                for(String string : stringArray) {
+                    if(string.equals(edge.getProgramStep().getIdentifier() + ".fst")) {
+                        result.add(stringArray);
+                    }
+                    if(string.equals(edge.getProgramStep().getIdentifier() + ".snd")) {
+                        result.add(stringArray);
+                    }
+                }
+            }
         }
         else if(edge.getProgramStep().getClass().getName().equals("ast.statement.Assignment") || edge.getProgramStep().getClass().getName().equals("ast.statement.ReadStatement")) {
             for(ArrayList<String> stringArray : elementRD) {
@@ -147,13 +131,11 @@ public class ReachingDefinitions implements Analysis {
                 }
             }
         }
-        //System.out.println(result);
         return result;
     }
 
     public ArrayList<ArrayList<String>> gen(Edge edge) {
         ArrayList<ArrayList<String>> result = new ArrayList<>();
-        //System.out.println(edge.getProgramStep().getClass().getName());
         if(edge.getProgramStep().getClass().getName().equals("ast.declaration.IntegerDeclaration") || edge.getProgramStep().getClass().getName().equals("ast.declaration.ArrayDeclaration")) {
             ArrayList<String> temp = new ArrayList<>();
             temp.add(edge.getProgramStep().getIdentifier());
@@ -161,7 +143,7 @@ public class ReachingDefinitions implements Analysis {
             temp.add(edge.getEndNode().getLabelId().toString());
             result.add(temp);
         }
-        else if(edge.getProgramStep().getClass().getName().equals("ast.declaration.RecordDeclaration")) {
+        else if(edge.getProgramStep().getClass().getName().equals("ast.declaration.RecordDeclaration") || edge.getProgramStep().getClass().getName().equals("ast.statement.RecordAssignment")) {
             ArrayList<String> temp = new ArrayList<>();
             temp.add(edge.getProgramStep().getIdentifier() + ".fst");
             temp.add(edge.getStartNode().getLabelId().toString());
@@ -173,9 +155,6 @@ public class ReachingDefinitions implements Analysis {
             temp2.add(edge.getEndNode().getLabelId().toString());
             result.add(temp2);
         }
-        else if(edge.getProgramStep().getClass().getName().equals("ast.statement.RecordAssignment")) {
-            //TODO
-        }
         else if(edge.getProgramStep().getClass().getName().equals("ast.statement.Assignment") || edge.getProgramStep().getClass().getName().equals("ast.statement.ReadStatement")) {
             ArrayList<String> temp = new ArrayList<>();
             temp.add(edge.getProgramStep().getlExpression().getIdentifier());
@@ -183,7 +162,6 @@ public class ReachingDefinitions implements Analysis {
             temp.add(edge.getEndNode().getLabelId().toString());
             result.add(temp);
         }
-        //System.out.println(result);
         return result;
     }
 

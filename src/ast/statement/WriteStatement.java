@@ -12,8 +12,14 @@ public class WriteStatement extends Statement{
         this.aExpression = aExp;
     }
 
+    @Override
     public AExpression getaExpression() {
         return this.aExpression;
+    }
+
+    @Override
+    public AExpression getaExpression2() {
+        return null;
     }
 
     @Override

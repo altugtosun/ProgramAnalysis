@@ -1,14 +1,15 @@
 package ast.statement;
 
+import ast.expression.aexpression.AExpression;
 import ast.expression.booleanExpression.BooleanExpression;
 import ast.expression.lexpression.LExpression;
 
 public class RecordAssignment extends Statement {
     private String identifier;
-    private Integer fst;
-    private Integer snd;
+    private AExpression fst;
+    private AExpression snd;
 
-    public RecordAssignment(String id, Integer fst, Integer snd) {
+    public RecordAssignment(String id, AExpression fst, AExpression snd) {
         this.identifier = id;
         this.fst = fst;
         this.snd = snd;
@@ -24,11 +25,13 @@ public class RecordAssignment extends Statement {
         return null;
     }
 
-    public Integer getFst() {
+    @Override
+    public AExpression getaExpression() {
         return this.fst;
     }
 
-    public Integer getSnd() {
+    @Override
+    public AExpression getaExpression2() {
         return this.snd;
     }
 
