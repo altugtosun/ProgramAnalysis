@@ -48,4 +48,9 @@ public class WhileStatement extends Statement {
     public AExpression getaExpression2() {
         return null;
     }
+
+    @Override
+    public Integer getSize() {
+        return null;
+    }
 }

@@ -23,6 +23,11 @@ public class WriteStatement extends Statement{
     }
 
     @Override
+    public Integer getSize() {
+        return null;
+    }
+
+    @Override
     public Statement getFirstStatement() {
         return null;
     }

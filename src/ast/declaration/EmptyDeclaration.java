@@ -34,4 +34,9 @@ public class EmptyDeclaration extends Declaration {
     public AExpression getaExpression2() {
         return null;
     }
+
+    @Override
+    public Integer getSize() {
+        return null;
+    }
 }

@@ -32,6 +32,11 @@ public class RecordDeclaration extends Declaration {
     }
 
     @Override
+    public Integer getSize() {
+        return null;
+    }
+
+    @Override
     public Declaration getFirstDeclaration() {
         return null;
     }

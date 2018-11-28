@@ -60,6 +60,11 @@ public class ReachingDefinitions implements Analysis {
     }
 
     @Override
+    public ControlFlowAnalysis getCfa() {
+        return this.cfa;
+    }
+
+    @Override
     public ArrayList<ArrayList<String>> createConstraints(Integer label) {
         ArrayList<ArrayList<String>> result = new ArrayList<>();
         if(label == 0) {

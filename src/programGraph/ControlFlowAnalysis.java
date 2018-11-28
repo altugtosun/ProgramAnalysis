@@ -24,6 +24,16 @@ public class ControlFlowAnalysis {
         this.variableList = variableList;
     }
 
+    public Integer getMaximumLabel() {
+        Integer max = 0;
+        for(Node node : nodeList) {
+            if(node.getLabelId() > max) {
+                max = node.getLabelId();
+            }
+        }
+        return max;
+    }
+
     public Node edgeDeclaration(Declaration declaration, Node startNode, Node endNode) {
         if(declaration.getClass().getName().equals("ast.declaration.IntegerDeclaration")) {
            Edge tempEdge = new Edge(startNode, endNode, declaration);
@@ -44,8 +54,14 @@ public class ControlFlowAnalysis {
             Node tempNode = new Node(startNode.getLabelId()+1);
             this.nodeList.add(tempNode);
             edgeDeclaration(declaration.getFirstDeclaration(), startNode, tempNode);
-            edgeDeclaration(declaration.getSecondDeclaration(), tempNode, endNode);
+
+            if(declaration.getSecondDeclaration().getClass().getName().equals("ast.declaration.DoubleDeclaration")) {
+                Node newEnd = new Node(endNode.getLabelId()+1);
+                edgeDeclaration(declaration.getSecondDeclaration(), tempNode, newEnd);
+                return newEnd;
+            }
             if(!declaration.getSecondDeclaration().getClass().getName().equals("ast.declaration.DoubleDeclaration")) {
+                edgeDeclaration(declaration.getSecondDeclaration(), tempNode, endNode);
                 return endNode;
             }
         }
@@ -73,7 +89,8 @@ public class ControlFlowAnalysis {
             this.edgeList.add(tempEdge);
         }
         else if(statement.getClass().getName().equals("ast.statement.IfStatement")) {
-            Node tempNode = new Node(startNode.getLabelId()+1);
+            //Node tempNode = new Node(startNode.getLabelId()+1);
+            Node tempNode = new Node(getMaximumLabel()+1);
             this.nodeList.add(tempNode);
             Edge tempEdge = new Edge(startNode, tempNode, statement.getBoolExpression());
             this.edgeList.add(tempEdge);
@@ -82,11 +99,13 @@ public class ControlFlowAnalysis {
             edgeStatement(statement.getFirstStatement(), tempNode, endNode);
         }
         else if(statement.getClass().getName().equals("ast.statement.IfElseStatement")) {
-            Node tempNode = new Node(startNode.getLabelId()+1);
+            //Node tempNode = new Node(startNode.getLabelId()+2);
+            Node tempNode = new Node(getMaximumLabel()+1);
             this.nodeList.add(tempNode);
             Edge tempEdge = new Edge(startNode, tempNode, statement.getBoolExpression());
             this.edgeList.add(tempEdge);
-            Node tempNode2 = new Node(startNode.getLabelId()+1);
+            //Node tempNode2 = new Node(startNode.getLabelId()+1);
+            Node tempNode2 = new Node(getMaximumLabel()+1);
             this.nodeList.add(tempNode2);
             Edge tempEdge2 = new Edge(startNode, tempNode2, new NotExpression(statement.getBoolExpression()));
             this.edgeList.add(tempEdge2);
@@ -96,14 +115,16 @@ public class ControlFlowAnalysis {
         else if(statement.getClass().getName().equals("ast.statement.WhileStatement")) {
             Edge tempEdge = new Edge(startNode, endNode, new NotExpression(statement.getBoolExpression()));
             this.edgeList.add(tempEdge);
-            Node tempNode2 = new Node(startNode.getLabelId()+2);
+            //Node tempNode2 = new Node(startNode.getLabelId()+2);
+            Node tempNode2 = new Node(getMaximumLabel()+1);
             this.nodeList.add(tempNode2);
             Edge tempEdge2 = new Edge(startNode, tempNode2, statement.getBoolExpression());
             this.edgeList.add(tempEdge2);
             edgeStatement(statement.getFirstStatement(), tempNode2, startNode);
         }
         else if(statement.getClass().getName().equals("ast.statement.DoubleStatement")) {
-            Node tempNode = new Node(startNode.getLabelId()+1);
+            //Node tempNode = new Node(startNode.getLabelId()+1);
+            Node tempNode = new Node(getMaximumLabel()+1);
             this.nodeList.add(tempNode);
             edgeStatement(statement.getFirstStatement(), startNode, tempNode);
             edgeStatement(statement.getSecondStatement(), tempNode, endNode);

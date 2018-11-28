@@ -22,6 +22,7 @@ public class AArithmeticExpression extends AExpression {
         return this.aExpression2;
     }
 
+    @Override
     public String getArithmeticOperator() {
         return this.arithmeticOperator;
     }

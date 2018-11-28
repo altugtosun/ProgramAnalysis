@@ -25,4 +25,9 @@ public class Expression implements ProgramStep {
     public AExpression getaExpression2() {
         return null;
     }
+
+    @Override
+    public Integer getSize() {
+        return null;
+    }
 }

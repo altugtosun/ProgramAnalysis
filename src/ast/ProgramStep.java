@@ -9,4 +9,5 @@ public interface ProgramStep {
     LExpression getlExpression();
     AExpression getaExpression();
     AExpression getaExpression2();
+    Integer getSize();
 }

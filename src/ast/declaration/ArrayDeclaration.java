@@ -33,6 +33,7 @@ public class ArrayDeclaration extends Declaration {
         return null;
     }
 
+    @Override
     public Integer getSize() {
         return this.size;
     }
