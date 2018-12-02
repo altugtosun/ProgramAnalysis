@@ -312,7 +312,6 @@ public class DetectionOfSigns implements Analysis {
             }
         }
         else if(aExpression.getClass().getName().equals("ast.expression.aexpression.AArithmeticExpression")) {
-            //TODO check array index
             if(aExpression.getArithmeticOperator().equals("+")) {
                 result = plus(signFunction(aExpression.getaExpression(), elementDS), signFunction(aExpression.getaExpression2(), elementDS));
             }

@@ -37,7 +37,7 @@ public class Worklist {
                 if(flag == 0) flag2 = 1;
             }
             if(flag2 == 1) continue;
-
+            //**********************************************
 
             if(newSol.containsAll(analysisType.getAnalysisSet().get(currentIndex)) && newSol.size() > analysisType.getAnalysisSet().get(currentIndex).size()) {
                 analysisType.updateAnalysisSet(currentIndex, newSol);
