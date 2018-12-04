@@ -24,7 +24,6 @@ public class Worklist {
             Integer currentIndex = extract();
             ArrayList<ArrayList<String>> newSol = analysisType.createConstraints(currentIndex);
 
-            //NEWEST ADDITION ******************************
             int flag2 = 0;
             for(String variable : analysisType.getCfa().variableList) {
                 int flag = 0;
@@ -37,7 +36,6 @@ public class Worklist {
                 if(flag == 0) flag2 = 1;
             }
             if(flag2 == 1) continue;
-            //**********************************************
 
             if(newSol.containsAll(analysisType.getAnalysisSet().get(currentIndex)) && newSol.size() > analysisType.getAnalysisSet().get(currentIndex).size()) {
                 analysisType.updateAnalysisSet(currentIndex, newSol);
