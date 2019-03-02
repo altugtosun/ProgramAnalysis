@@ -186,6 +186,5 @@ public class Runner {
         dsWorklist2.solve();
         ds2.print();
 
-
     }
 }
